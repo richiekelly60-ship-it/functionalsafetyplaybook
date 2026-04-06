@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Functional Safety Playbook — IEC 61508/61511 Templates, SIL Verification &amp; Peer Support for FSEs</title>
+<meta name="description" content="A peer community and professional toolkit for functional safety engineers. IEC 61511 document library, SIL verification tool, live Q&amp;A, and structured routes into nuclear. Join 249 engineers across 20+ countries.">
+<meta property="og:title" content="Functional Safety Playbook — Templates, Tools &amp; Peer Support for FSEs">
+<meta property="og:description" content="IEC 61511 FSMS document library, SILVerify three-barrier SIL verification, live decision review sessions, and a peer community of 249 functional safety engineers.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://functionalsafetyplaybook.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F2B43;--navy2:#1B3A55;--teal:#146C94;--teal2:#1a85b5;--orange:#F8860C;--orange2:#e07508;--cream:#F8F5F0;--grey:#E8E4DE;--text:#1a1a2e;--muted:#6B7A8D;--white:#ffffff;--green:#1A7A4A}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,43,67,0.97);backdrop-filter:blur(8px);padding:14px 40px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{height:32px}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-link{color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;transition:color 0.2s}.nav-link:hover{color:white}
+.nav-cta{background:var(--orange);color:white;padding:10px 22px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;transition:background 0.2s}.nav-cta:hover{background:var(--orange2)}
+.hero{background:var(--navy);min-height:100vh;display:flex;align-items:center;padding:120px 40px 80px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(20,108,148,0.18) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(248,134,12,0.08) 0%,transparent 60%)}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 380px;gap:72px;align-items:center;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(248,134,12,0.12);border:1px solid rgba(248,134,12,0.3);color:var(--orange);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:28px}
+.hero-tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
+h1{font-family:"DM Serif Display",serif;font-size:clamp(34px,5vw,54px);line-height:1.1;color:var(--white);margin-bottom:24px;letter-spacing:-0.02em}
+h1 em{font-style:italic;color:var(--teal2)}
+.hero-sub{font-size:18px;line-height:1.65;color:rgba(255,255,255,0.7);margin-bottom:36px;max-width:520px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.btn-primary{background:var(--orange);color:white;font-weight:600;padding:15px 30px;border-radius:4px;text-decoration:none;font-size:15px;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--orange2);transform:translateY(-1px)}
+.btn-ghost{color:rgba(255,255,255,0.5);padding:15px 18px;text-decoration:none;font-size:14px;transition:color 0.2s;display:inline-flex;align-items:center}
+.btn-ghost:hover{color:white}
+.hero-mobile-stats{display:none;gap:12px;margin-top:12px}
+.hms{flex:1;text-align:center;background:rgba(255,255,255,0.06);border-radius:8px;padding:14px 8px;border:1px solid rgba(255,255,255,0.08)}
+.hms strong{display:block;font-size:22px;color:var(--orange);font-family:"DM Serif Display",serif}
+.hms span{font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.05em}
+.hero-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:30px;backdrop-filter:blur(4px)}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+.stat{text-align:center;padding:16px 10px;background:rgba(255,255,255,0.04);border-radius:8px;border:1px solid rgba(255,255,255,0.07)}
+.stat-num{font-family:"DM Serif Display",serif;font-size:28px;color:var(--orange);display:block;line-height:1;margin-bottom:5px}
+.stat-label{font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.06em}
+.testi-mini{border-left:3px solid var(--teal);padding:14px 18px;background:rgba(20,108,148,0.1);border-radius:0 8px 8px 0}
+.testi-mini p{font-size:13px;line-height:1.6;color:rgba(255,255,255,0.75);font-style:italic;margin-bottom:8px}
+.testi-mini cite{font-size:11px;color:var(--teal2);font-style:normal;font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+.sec{padding:88px 40px}
+.sec-inner{max-width:960px;margin:0 auto}
+.sec-label{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;display:block}
+.sec-h2{font-family:"DM Serif Display",serif;font-size:clamp(26px,4vw,40px);line-height:1.2;color:var(--navy);margin-bottom:20px;letter-spacing:-0.02em}
+.bg-white{background:var(--white)}.bg-cream{background:var(--cream)}.bg-navy{background:var(--navy)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+.problem-card{padding:22px 26px;border:1px solid var(--grey);border-radius:8px;border-left:4px solid var(--navy);font-size:15px;line-height:1.55}
+.problem-card strong{display:block;margin-bottom:5px;color:var(--navy);font-weight:600}
+.quotes-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.quote-card{background:var(--white);border-radius:10px;padding:30px 34px;border-top:4px solid var(--teal);box-shadow:0 2px 20px rgba(0,0,0,0.06)}
+.quote-card blockquote{font-family:"DM Serif Display",serif;font-size:17px;line-height:1.6;color:var(--navy);font-style:italic;margin-bottom:18px}
+.quote-attr{font-size:13px;color:var(--muted);font-weight:500}
+.quote-attr strong{color:var(--navy)}
+.products-intro{text-align:center;margin-bottom:48px}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:start}
+.prod-card{background:var(--white);border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);display:flex;flex-direction:column;transition:transform 0.2s,box-shadow 0.2s}
+.prod-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.12)}
+.prod-card.featured{border:2px solid var(--orange)}
+.prod-card.best-value{border:2px solid var(--teal)}
+.prod-header{padding:22px 22px 18px;text-align:center}
+.prod-tags{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.prod-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:100px}
+.tag-free{background:rgba(20,108,148,0.1);color:var(--teal)}
+.tag-kit{background:rgba(248,134,12,0.1);color:var(--orange)}
+.tag-premium{background:rgba(248,134,12,0.15);color:var(--orange);border:1px solid rgba(248,134,12,0.3)}
+.tag-best{background:rgba(20,108,148,0.15);color:var(--teal);border:1px solid rgba(20,108,148,0.3)}
+.prod-name{font-family:"DM Serif Display",serif;font-size:20px;color:var(--navy);margin-bottom:8px;line-height:1.2}
+.prod-price{font-family:"DM Serif Display",serif;font-size:32px;color:var(--navy);line-height:1}
+.prod-price-sub{font-size:13px;color:var(--muted);margin-top:3px}
+.prod-price-note{font-size:12px;color:var(--orange);font-weight:600;margin-top:6px}
+.prod-price-note2{font-size:11px;color:var(--muted);margin-top:4px}
+.prod-divider{height:1px;background:var(--grey);margin:0 22px}
+.prod-body{padding:20px 22px;flex:1}
+.prod-desc{font-size:14px;line-height:1.6;color:var(--muted);margin-bottom:14px}
+.prod-outcome{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:12px;padding:8px 12px;background:rgba(15,43,67,0.04);border-radius:6px;border-left:3px solid var(--teal)}
+.prod-features{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.prod-features li{display:flex;align-items:flex-start;gap:9px;font-size:13px;line-height:1.5;color:var(--text)}
+.feat-check{width:17px;height:17px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.feat-check-orange{background:var(--orange)}
+.prod-roi{font-size:12px;color:var(--green);line-height:1.5;padding:10px 12px;background:rgba(26,122,74,0.06);border-radius:6px;border-left:3px solid var(--green);margin-bottom:10px}
+.prod-urgency{font-size:12px;color:#7A4A00;line-height:1.5;padding:10px 12px;background:rgba(248,134,12,0.08);border-radius:6px;border-left:3px solid var(--orange);margin-bottom:10px}
+.prod-guarantee{font-size:12px;color:var(--muted);line-height:1.5;padding:8px 12px;background:var(--cream);border-radius:6px;margin-bottom:14px;text-align:center}
+.prod-footer{padding:0 22px 22px}
+.btn-card{display:block;text-align:center;padding:13px;border-radius:6px;font-size:14px;font-weight:600;text-decoration:none;transition:all 0.2s}
+.btn-card-primary{background:var(--orange);color:white}.btn-card-primary:hover{background:var(--orange2)}
+.btn-card-navy{background:var(--navy);color:white}.btn-card-navy:hover{background:var(--navy2)}
+.btn-card-teal{background:var(--teal);color:white}.btn-card-teal:hover{background:#115d80}
+.prod-secondary{display:block;text-align:center;font-size:12px;color:var(--muted);text-decoration:none;margin-top:9px}
+.prod-ribbon{background:var(--orange);color:white;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:6px 0;text-align:center}
+.doc-mockup{display:flex;gap:8px;justify-content:center;margin:10px 0 16px}
+.doc-page{width:42px;height:54px;border-radius:3px;border:1px solid var(--grey);background:white;display:flex;flex-direction:column;padding:4px;box-shadow:2px 2px 6px rgba(0,0,0,0.1)}
+.doc-page:nth-child(1){transform:rotate(-6deg) translateX(4px)}
+.doc-page:nth-child(2){transform:rotate(-2deg)}
+.doc-page:nth-child(3){transform:rotate(3deg) translateX(-4px)}
+.doc-bar{height:3px;border-radius:1px;margin-bottom:3px}
+.doc-bar.navy{background:var(--navy)}.doc-bar.teal{background:var(--teal)}
+.doc-line{height:2px;background:var(--grey);border-radius:1px;margin-bottom:2px;width:80%}
+.doc-line.w60{width:60%}
+.silv-mockup{background:var(--cream);border:1px solid var(--grey);border-radius:8px;padding:10px;margin:10px 0 8px;font-size:11px}
+.silv-row{display:flex;justify-content:space-between;align-items:center;padding:4px 6px;border-radius:4px;margin-bottom:3px}
+.silv-row.pass{background:rgba(26,122,74,0.08)}
+.silv-row.head{background:var(--navy);color:white;font-weight:600;border-radius:4px 4px 0 0}
+.silv-label{color:var(--muted)}.silv-pass{color:var(--green);font-weight:700}.silv-val{color:var(--text);font-weight:600}
+.comparison{margin-top:48px;background:var(--cream);border-radius:12px;overflow:hidden}
+.comp-row{display:grid;grid-template-columns:220px repeat(4,1fr);border-bottom:1px solid var(--grey)}
+.comp-row:last-child{border-bottom:none}
+.comp-cell{padding:13px 14px;font-size:13px;display:flex;align-items:center}
+.comp-cell.header{background:var(--navy);color:white;font-weight:600;font-size:12px;letter-spacing:0.04em;padding:15px}
+.comp-cell.feature-name{color:var(--muted);font-size:13px}
+.comp-cell.yes{color:var(--teal);font-weight:700}
+.comp-cell.no{color:#ccc}
+.comp-cell.hl{background:rgba(248,134,12,0.04)}
+.gin-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.gin-points{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:32px}
+.gin-point{display:flex;align-items:flex-start;gap:12px;font-size:15px;line-height:1.55;color:var(--text)}
+.gin-point::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;margin-top:8px}
+.btn-gin{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:white;padding:16px 30px;border-radius:4px;font-size:15px;font-weight:600;text-decoration:none;transition:all 0.2s}
+.btn-gin:hover{background:var(--navy2);transform:translateY(-1px)}
+.gin-note{margin-top:14px;font-size:13px;color:var(--muted)}
+.gin-card{background:var(--navy);border-radius:12px;padding:38px;position:relative;overflow:hidden}
+.gin-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(20,108,148,0.35) 0%,transparent 60%)}
+.gin-card-inner{position:relative;z-index:1}
+.gin-card-tag{display:inline-block;background:rgba(248,134,12,0.15);border:1px solid rgba(248,134,12,0.3);color:var(--orange);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:100px;margin-bottom:22px}
+.gin-card h3{font-family:"DM Serif Display",serif;font-size:24px;color:var(--white);line-height:1.3;margin-bottom:22px}
+.gin-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+.gin-stat{background:rgba(255,255,255,0.05);border-radius:8px;padding:16px;border:1px solid rgba(255,255,255,0.08);text-align:center}
+.gin-stat strong{display:block;font-size:22px;color:var(--orange);font-family:"DM Serif Display",serif}
+.gin-stat span{font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.05em}
+.gin-card-note{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;font-style:italic}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.about-body p{font-size:16px;line-height:1.7;color:var(--muted);margin-bottom:14px}
+.creds{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.cred{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--navy);font-weight:500}
+.cred::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.about-visual{background:var(--navy);border-radius:12px;padding:38px;position:relative;overflow:hidden}
+.about-visual::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(20,108,148,0.3) 0%,transparent 60%)}
+.about-q{position:relative;z-index:1;font-family:"DM Serif Display",serif;font-size:20px;line-height:1.5;color:var(--white);font-style:italic;margin-bottom:22px}
+.about-cite{font-size:13px;color:var(--teal2);font-weight:600;text-transform:uppercase;letter-spacing:0.06em}
+.faq-list{display:flex;flex-direction:column;gap:14px}
+.faq-item{background:var(--white);border-radius:8px;padding:26px 30px;border-left:4px solid var(--teal)}
+.faq-item h3{font-size:16px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.faq-item p{font-size:15px;line-height:1.65;color:var(--muted)}
+.final{background:var(--navy);padding:96px 40px;text-align:center;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(20,108,148,0.2) 0%,transparent 70%)}
+.final-inner{max-width:640px;margin:0 auto;position:relative;z-index:1}
+.final h2{font-family:"DM Serif Display",serif;font-size:clamp(28px,4vw,44px);color:var(--white);margin-bottom:18px;letter-spacing:-0.02em;line-height:1.2}
+.final p{font-size:17px;line-height:1.65;color:rgba(255,255,255,0.6);margin-bottom:36px}
+.final-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.btn-outline-white{color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.3);padding:15px 28px;border-radius:4px;text-decoration:none;font-size:15px;font-weight:500;transition:all 0.2s}
+.btn-outline-white:hover{color:white;border-color:white}
+.final-tertiary{font-size:14px;color:rgba(255,255,255,0.4);text-decoration:none;display:block;margin-top:8px;transition:color 0.2s}
+.final-tertiary:hover{color:rgba(255,255,255,0.7)}
+footer{background:#0a1f30;padding:26px 40px;text-align:center}
+footer p{font-size:13px;color:rgba(255,255,255,0.3)}
+footer a{color:rgba(255,255,255,0.35);text-decoration:none}
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+@media(max-width:960px){
+  nav{padding:14px 20px}.nav-links{display:none}
+  .hero{padding:100px 20px 60px}.hero-inner{grid-template-columns:1fr;gap:0}.hero-card{display:none}
+  .hero-mobile-stats{display:flex}
+  .sec{padding:64px 20px}
+  .problem-grid,.quotes-grid{grid-template-columns:1fr}
+  .products-grid{grid-template-columns:1fr 1fr}
+  .comp-row{grid-template-columns:120px repeat(4,1fr)}.comp-cell{padding:10px 8px;font-size:11px}
+  .gin-grid,.about-grid{grid-template-columns:1fr;gap:36px}
+}
+@media(max-width:600px){.products-grid{grid-template-columns:1fr}.comp-row{display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="data:image/png;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//9k=" alt="Functional Safety Playbook" class="nav-logo">
+  <div class="nav-links">
+    <a href="#products" class="nav-link">Products</a>
+    <a href="#gin" class="nav-link">Get Into Nuclear</a>
+    <a href="#about" class="nav-link">About</a>
+  </div>
+  <a href="https://www.skool.com/functionalsafety" class="nav-cta">Join Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">249 Members &middot; 83% Engagement &middot; 100% Retention</div>
+      <h1>The grey areas in IEC&nbsp;61508 don&#39;t care about your <em>schedule.</em></h1>
+      <p class="hero-sub">A peer community where functional safety engineers get confidence checks from experienced practitioners &mdash; when the decisions are hard and the pressure is real.</p>
+      <div class="hero-ctas">
+        <a href="https://www.skool.com/functionalsafety" class="btn-primary">Join the Community &rarr;</a>
+        <a href="#products" class="btn-ghost">See all products &darr;</a>
+      </div>
+      <div class="hero-mobile-stats">
+        <div class="hms"><strong>249</strong><span>Members</span></div>
+        <div class="hms"><strong>83%</strong><span>Engagement</span></div>
+        <div class="hms"><strong>100%</strong><span>Retention</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-num">249</span><span class="stat-label">Members</span></div>
+        <div class="stat"><span class="stat-num">83%</span><span class="stat-label">Engagement</span></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Retention</span></div>
+        <div class="stat"><span class="stat-num">20+</span><span class="stat-label">Countries</span></div>
+      </div>
+      <div class="testi-mini">
+        <p>&ldquo;This is so helpful in so many ways. Never seen anything quite like it before &mdash; good access to material and real live engineers.&rdquo;</p>
+        <cite>Anth Gunn &mdash; I&amp;C and Functional Safety Engineer, UK</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="sec bg-white">
+  <div class="sec-inner fade-up">
+    <span class="sec-label">The Reality</span>
+    <h2 class="sec-h2">Most functional safety engineers are the only specialist in the room.</h2>
+    <p style="font-size:17px;line-height:1.65;color:var(--muted);max-width:620px;margin-bottom:44px">Forums don&#39;t cut it. Colleagues often don&#39;t have the background. And the standard doesn&#39;t always give a clean answer. When the decision affects schedule, cost, or sign-off &mdash; you need a proper technical discussion, not guesswork.</p>
+    <div class="problem-grid">
+      <div class="problem-card"><strong>Rejecting a design</strong>You know something isn&#39;t right but need to defend it technically and commercially.</div>
+      <div class="problem-card"><strong>Challenging a SIL claim</strong>The vendor says SIL 2. You&#39;re not sure the application matches. Where do you draw the line?</div>
+      <div class="problem-card"><strong>Grey areas in the standard</strong>IEC 61508 and IEC 61511 leave genuine room for interpretation. Not all interpretations are equal.</div>
+      <div class="problem-card"><strong>Explaining why it can&#39;t go faster</strong>The technical position needs to be defensible to people who don&#39;t speak the language.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec bg-cream">
+  <div class="sec-inner fade-up">
+    <h2 class="sec-h2">What working engineers say.</h2>
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <blockquote>&ldquo;Forums like this are great for me to reach out for confidence checks more than anything.&rdquo;</blockquote>
+        <p class="quote-attr"><strong>Anth Gunn</strong> &mdash; I&amp;C and Functional Safety Engineer, UK</p>
+      </div>
+      <div class="quote-card">
+        <blockquote>&ldquo;My main benefit is seeing how other people reflect and interpret the requirements of 61508, while having a chance to provide my own interpretation and getting it critiqued.&rdquo;</blockquote>
+        <p class="quote-attr"><strong>Morten Juelsgaard</strong> &mdash; Functional Safety Engineer, Denmark</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="sec bg-white" id="products">
+  <div class="sec-inner">
+    <div class="products-intro fade-up">
+      <span class="sec-label" style="display:block;text-align:center">Choose Your Path</span>
+      <h2 class="sec-h2" style="color:var(--navy)">Four ways in. One community.</h2>
+      <p style="font-size:17px;color:var(--muted);max-width:560px;margin:0 auto">Whether you need documents today, ongoing peer support, or a structured route into nuclear &mdash; there&#39;s a path that fits where you are right now.</p>
+    </div>
+
+    <div class="products-grid fade-up">
+
+      <!-- FREE -->
+      <div class="prod-card">
+        <div class="prod-header">
+          <div class="prod-tags"><div class="prod-tag tag-free">Free</div></div>
+          <div class="prod-name">Community Access</div>
+          <div class="prod-price">&#163;0</div>
+          <div class="prod-price-sub">No credit card required</div>
+        </div>
+        <div class="prod-divider"></div>
+        <div class="prod-body">
+          <div class="prod-outcome">Get involved in real technical discussions from day one.</div>
+          <p class="prod-desc">Join 249 functional safety engineers across oil and gas, nuclear, pharmaceutical, space and more.</p>
+          <ul class="prod-features">
+            <li><span class="feat-check">&#10003;</span>Community discussions and peer threads</li>
+            <li><span class="feat-check">&#10003;</span>Case studies and free resources</li>
+            <li><span class="feat-check">&#10003;</span>See what Premium members are working through</li>
+            <li><span class="feat-check">&#10003;</span>Network with FSEs across 20+ countries</li>
+          </ul>
+        </div>
+        <div class="prod-footer">
+          <a href="https://www.skool.com/functionalsafety" class="btn-card btn-card-teal">Join Free &rarr;</a>
+        </div>
+      </div>
+
+      <!-- FSMS STARTER -->
+      <div class="prod-card">
+        <div class="prod-header">
+          <div class="prod-tags"><div class="prod-tag tag-kit">One-Time Purchase</div></div>
+          <div class="prod-name">FSMS Starter</div>
+          <div class="prod-price">&#163;247</div>
+          <div class="prod-price-sub">One-time &middot; yours to keep</div>
+          <div class="prod-price-note">Expense as professional development</div>
+        </div>
+        <div class="prod-divider"></div>
+        <div class="prod-body">
+          <div class="doc-mockup">
+            <div class="doc-page"><div class="doc-bar navy"></div><div class="doc-line"></div><div class="doc-line w60"></div><div class="doc-line"></div></div>
+            <div class="doc-page"><div class="doc-bar teal"></div><div class="doc-line"></div><div class="doc-line w60"></div><div class="doc-line"></div></div>
+            <div class="doc-page"><div class="doc-bar navy"></div><div class="doc-line"></div><div class="doc-line w60"></div><div class="doc-line"></div></div>
+          </div>
+          <div class="prod-outcome">Open your next project with your FSMS already in place.</div>
+          <p class="prod-desc">Five core governance documents that demonstrate you have an FSMS &mdash; ready to adapt and use immediately.</p>
+          <ul class="prod-features">
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Functional Safety Management Plan (FSMP)</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Personnel Competency Management Procedure</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Personnel Competency Log Template</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Project Safety Plan Template</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Project Action Item Log (Excel)</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>5 documents &middot; ~150 pages &middot; editable Word &amp; Excel</li>
+          </ul>
+          <div class="prod-guarantee">&#9675; 30-day satisfaction guarantee &mdash; full refund if the documents don&#39;t save you time. No questions asked.</div>
+        </div>
+        <div class="prod-footer">
+          <a href="https://buy.stripe.com/3cIcN53kO1NK5IDcFKfIs01" class="btn-card btn-card-teal">Buy Now &mdash; &#163;247 &rarr;</a>
+          <span class="prod-secondary">Invoice available &mdash; email richard@functionalsafetyplaybook.com</span>
+        </div>
+      </div>
+
+      <!-- FSMS PROFESSIONAL -->
+      <div class="prod-card best-value">
+        <div class="prod-header">
+          <div class="prod-tags">
+            <div class="prod-tag tag-kit">One-Time Purchase</div>
+            <div class="prod-tag tag-best">Most Complete</div>
+          </div>
+          <div class="prod-name">FSMS Professional</div>
+          <div class="prod-price">&#163;497</div>
+          <div class="prod-price-sub">One-time &middot; yours to keep</div>
+          <div class="prod-price-note">Includes all Starter documents</div>
+          <div class="prod-price-note2">Expense as professional development</div>
+        </div>
+        <div class="prod-divider"></div>
+        <div class="prod-body">
+          <div class="doc-mockup">
+            <div class="doc-page"><div class="doc-bar navy"></div><div class="doc-line"></div><div class="doc-line w60"></div><div class="doc-line"></div></div>
+            <div class="doc-page"><div class="doc-bar teal"></div><div class="doc-line"></div><div class="doc-line w60"></div><div class="doc-line"></div></div>
+            <div class="doc-page"><div class="doc-bar navy"></div><div class="doc-line"></div><div class="doc-line w60"></div><div class="doc-line"></div></div>
+          </div>
+          <div class="prod-outcome">Pass your next FSA with a complete, IEC 61511-aligned procedure library.</div>
+          <p class="prod-desc">Every procedure from LOPA through to proof testing. The equivalent of 80&ndash;120 hours of document writing &mdash; ready to use this week.</p>
+          <ul class="prod-features">
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Everything in FSMS Starter, plus:</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Functional Safety Assessment Procedure (FSA Stages 1&ndash;5)</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Safety Requirements Specification Procedure</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>SIL Verification Procedure (SILVerify integration)</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Detailed Safety Requirements Specification (DSRS)</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>LOPA Procedure</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Operations &amp; Maintenance Procedure</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Proof Test Procedure</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Management of Change Procedure + MoC Register</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>12 documents &middot; 350+ pages &middot; editable Word &amp; Excel</li>
+          </ul>
+          <div class="prod-roi">&#128200; An FSE billing at &#163;500/day saves 2&ndash;3 days on document writing. That&#39;s &#163;1,000&ndash;&#163;1,500 of recovered time for a &#163;497 investment &mdash; a 3:1 return before you use it on a second project.</div>
+          <div class="prod-urgency">&#9650; Introductory price. 6 more documents in production. When the library reaches 18 documents, the price moves to &#163;697. Buy now and every future document is included at no extra cost.</div>
+          <div class="prod-guarantee">&#9675; 30-day satisfaction guarantee &mdash; full refund if the documents don&#39;t save you time. No questions asked.</div>
+        </div>
+        <div class="prod-footer">
+          <a href="https://buy.stripe.com/14A9AT4oSakggnh0X2fIs00" class="btn-card btn-card-primary">Buy Now &mdash; &#163;497 &rarr;</a>
+          <span class="prod-secondary">Invoice available &mdash; email richard@functionalsafetyplaybook.com</span>
+        </div>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="prod-card featured">
+        <div class="prod-ribbon">&#9889; 5 Founding Spots Left</div>
+        <div class="prod-header">
+          <div class="prod-tags"><div class="prod-tag tag-premium">Best Value</div></div>
+          <div class="prod-name">Premium Membership</div>
+          <div class="prod-price">&#36;30</div>
+          <div class="prod-price-sub">per month &middot; (~&#163;24/month) &middot; founding price</div>
+          <div class="prod-price-note">Locked permanently &middot; moves to &#36;59/month when spots close</div>
+          <div class="prod-price-note2">Expense as professional development &middot; Invoice available for annual payment</div>
+        </div>
+        <div class="prod-divider"></div>
+        <div class="prod-body">
+          <div class="prod-outcome">Stop making the hard calls alone.</div>
+          <p class="prod-desc">Everything in FSMS Professional plus live sessions, SILVerify, nuclear guidance, and direct peer support from experienced practitioners.</p>
+          <div class="silv-mockup">
+            <div class="silv-row head"><span>SILVerify Report</span><span>Result</span></div>
+            <div class="silv-row pass"><span class="silv-label">SIL Target</span><span class="silv-val">SIL 2</span></div>
+            <div class="silv-row pass"><span class="silv-label">PFDavg achieved</span><span class="silv-val">4.2 &times; 10&#8315;&#179;</span></div>
+            <div class="silv-row pass"><span class="silv-label">Overall verdict</span><span class="silv-pass">&#10003; PASS</span></div>
+          </div>
+          <p style="font-size:11px;color:var(--muted);margin:-6px 0 12px;text-align:center">Three-barrier SIL verification with automated 13-section Word report. A 10-SIF project takes 2&ndash;3 days by hand &mdash; SILVerify generates each report in one click.</p>
+          <ul class="prod-features">
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Decision Review Live &mdash; bring real project scenarios</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>SILVerify &mdash; three-barrier SIL verification, automated Word report</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Full FSMS Professional library included</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Nuclear guidance notes &mdash; ONR TAG based</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Weekly Discussion and Q&amp;A sessions</li>
+            <li><span class="feat-check feat-check-orange">&#10003;</span>Founding members locked at &#36;30/month permanently</li>
+          </ul>
+        </div>
+        <div class="prod-footer">
+          <a href="https://www.skool.com/functionalsafety" class="btn-card btn-card-primary">Join Premium &mdash; &#36;30/month &rarr;</a>
+          <span class="prod-secondary">Join free first &mdash; upgrade to Premium inside the community</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Comparison table -->
+    <div class="comparison fade-up" style="margin-top:48px">
+      <div class="comp-row">
+        <div class="comp-cell header">What&#39;s included</div>
+        <div class="comp-cell header">Free</div>
+        <div class="comp-cell header">FSMS Starter</div>
+        <div class="comp-cell header">FSMS Professional</div>
+        <div class="comp-cell header" style="background:rgba(248,134,12,0.15);color:var(--orange)">Premium</div>
+      </div>
+      <div class="comp-row"><div class="comp-cell feature-name">Community access</div><div class="comp-cell yes">&#10003;</div><div class="comp-cell yes">&#10003;</div><div class="comp-cell yes">&#10003;</div><div class="comp-cell yes hl">&#10003;</div></div>
+      <div class="comp-row"><div class="comp-cell feature-name">FSMS governance docs (FSMP, Competency, PSP, Action Log)</div><div class="comp-cell no">&mdash;</div><div class="comp-cell yes">&#10003;</div><div class="comp-cell yes">&#10003;</div><div class="comp-cell yes hl">&#10003;</div></div>
+      <div class="comp-row"><div class="comp-cell feature-name">Full IEC 61511 procedure library (12 documents, 350+ pages)</div><div class="comp-cell no">&mdash;</div><div class="comp-cell no">&mdash;</div><div class="comp-cell yes">&#10003;</div><div class="comp-cell yes hl">&#10003;</div></div>
+      <div class="comp-row"><div class="comp-cell feature-name">SILVerify access</div><div class="comp-cell no">&mdash;</div><div class="comp-cell no">&mdash;</div><div class="comp-cell no">&mdash;</div><div class="comp-cell yes hl">&#10003;</div></div>
+      <div class="comp-row"><div class="comp-cell feature-name">Decision Review Live</div><div class="comp-cell no">&mdash;</div><div class="comp-cell no">&mdash;</div><div class="comp-cell no">&mdash;</div><div class="comp-cell yes hl">&#10003;</div></div>
+      <div class="comp-row"><div class="comp-cell feature-name">Nuclear guidance notes</div><div class="comp-cell no">&mdash;</div><div class="comp-cell no">&mdash;</div><div class="comp-cell no">&mdash;</div><div class="comp-cell yes hl">&#10003;</div></div>
+      <div class="comp-row"><div class="comp-cell feature-name">Weekly Q&amp;A sessions</div><div class="comp-cell no">&mdash;</div><div class="comp-cell no">&mdash;</div><div class="comp-cell no">&mdash;</div><div class="comp-cell yes hl">&#10003;</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GET INTO NUCLEAR -->
+<section class="sec bg-cream" id="gin">
+  <div class="sec-inner">
+    <div class="gin-grid fade-up">
+      <div>
+        <span class="sec-label">For Certified Engineers</span>
+        <h2 class="sec-h2">Ready to move into nuclear?</h2>
+        <p style="font-size:17px;line-height:1.65;color:var(--muted);margin-bottom:28px">Get Into Nuclear is an eight-week live programme for TÜV or Exida certified engineers who want to work in the nuclear sector &mdash; and want a structured, fast route in.</p>
+        <ul class="gin-points">
+          <li class="gin-point">Who it&#39;s for: certified FSEs who understand IEC 61511 but not the ONR regulatory environment.</li>
+          <li class="gin-point">What it delivers: regulatory framework, classification system, software requirements, and the nuclear safety case &mdash; in eight weeks, with live sessions, personal feedback, and post-placement mentoring.</li>
+          <li class="gin-point">The financial case: nuclear FSEs earn &#163;60k&ndash;&#163;75k+. Contractors bill &#163;500&ndash;&#163;800/day. The knowledge gap is the only thing standing between a certified engineer and those rates.</li>
+        </ul>
+        <a href="https://form.typeform.com/to/IfpSX3tS" class="btn-gin">Express Interest &rarr;</a>
+        <p class="gin-note">Cohort limited to 10. Next date to be confirmed. &#163;1,497.</p>
+      </div>
+      <div class="gin-card">
+        <div class="gin-card-inner">
+          <div class="gin-card-tag">Get Into Nuclear</div>
+          <h3>Eight weeks. One programme. The knowledge gap closed.</h3>
+          <div class="gin-stats">
+            <div class="gin-stat"><strong>8</strong><span>Live Sessions</span></div>
+            <div class="gin-stat"><strong>10</strong><span>Max Cohort</span></div>
+            <div class="gin-stat"><strong>&#163;1,497</strong><span>One-off</span></div>
+            <div class="gin-stat"><strong>3mo</strong><span>Post-placement</span></div>
+          </div>
+          <p class="gin-card-note">&ldquo;The salary uplift pays for itself in the first month. A process industry FSE moving into nuclear adds &#163;10,000&ndash;&#163;25,000 per year from day one.&rdquo;</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec bg-white" id="about">
+  <div class="sec-inner">
+    <div class="about-grid fade-up">
+      <div class="about-body">
+        <span class="sec-label">Who Built This</span>
+        <h2 class="sec-h2">20 years in nuclear. Still learning.</h2>
+        <p>I have been the only functional safety engineer in the room on projects worth hundreds of millions of pounds. I know what the grey areas feel like when the schedule is slipping and the pressure is on.</p>
+        <p>I built this community because the conversations that matter in functional safety &mdash; the confidence checks, the peer critiques, the &ldquo;is this right or am I missing something?&rdquo; moments &mdash; deserve a proper home.</p>
+        <div class="creds">
+          <div class="cred">Exida CFSE Certified</div>
+          <div class="cred">TÜV Functional Safety Engineer</div>
+          <div class="cred">Masters &mdash; Nuclear Control and Instrumentation</div>
+          <div class="cred">20+ years nuclear project experience</div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <p class="about-q">&ldquo;This is so helpful in so many ways. Never seen anything quite like it before &mdash; good access to material and real live engineers.&rdquo;</p>
+        <p class="about-cite">Anth Gunn &mdash; I&amp;C and Functional Safety Engineer, UK</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec bg-cream">
+  <div class="sec-inner fade-up">
+    <h2 class="sec-h2">Common questions.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Can I expense the FSMS documents or Premium membership through work?</h3>
+        <p>Most members do. &#163;247 and &#163;497 one-off purchases both qualify as professional development in most organisations. Premium at &#36;30&ndash;&#36;59/month (~&#163;24&ndash;&#163;47) is also expensable. All products can be purchased by invoice &mdash; email richard@functionalsafetyplaybook.com with your company details and we&#39;ll raise an invoice with VAT receipt.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What&#39;s the difference between FSMS Starter, FSMS Professional, and Premium?</h3>
+        <p>FSMS Starter (&#163;247) gives you the five core governance documents &mdash; the FSMP, competency procedure, project safety plan, competency log, and action item log. It&#39;s the foundation you need to demonstrate an FSMS to a client.</p>
+        <p style="margin-top:10px">FSMS Professional (&#163;497) includes everything in Starter plus the complete IEC 61511 procedure library &mdash; FSA, SRS, SIL verification, LOPA, proof testing, operations and maintenance, management of change, and the DSRS. 12 documents, 350+ pages, all editable. FSMS Starter buyers can upgrade by paying the difference.</p>
+        <p style="margin-top:10px">Premium (&#36;30/month) includes all Professional documents plus SILVerify access, live Decision Review sessions, nuclear guidance notes, weekly Q&amp;A, and ongoing peer support. FSMS Professional buyers receive a credit toward their first month of Premium.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is the community actually active?</h3>
+        <p>83% engagement, 100% retention among paying members. Real technical threads run every week &mdash; including a live burner management system SIL scenario currently being worked through. Decision Review Live runs fortnightly, weekly discussions every Friday.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What is the 30-day guarantee?</h3>
+        <p>If the FSMS Starter or FSMS Professional documents don&#39;t save you time on your next project, email richard@functionalsafetyplaybook.com within 30 days for a full refund. No questions asked. The documents are editable Word and Excel files &mdash; the only reason to ask for a refund is if they weren&#39;t useful, and that&#39;s something we want to know about.</p>
+      </div>
+      <div class="faq-item">
+        <h3>I&#39;m not a nuclear engineer &mdash; is this relevant to me?</h3>
+        <p>Yes. The community covers IEC 61508 and IEC 61511 across oil and gas, pharmaceutical, chemical, manufacturing, and space sectors. The nuclear guidance notes and Get Into Nuclear programme are for engineers considering that move &mdash; Premium membership is for any serious functional safety engineer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="final-inner fade-up">
+    <h2>Stop making the hard calls alone.</h2>
+    <p>249 functional safety engineers. Real scenarios. Experienced practitioners. Join free and upgrade when it makes sense.</p>
+    <div class="final-ctas">
+      <a href="https://www.skool.com/functionalsafety" class="btn-primary" style="font-size:17px;padding:18px 40px">Join the Community &rarr;</a>
+      <a href="#products" class="btn-outline-white">Browse products &uarr;</a>
+    </div>
+    <a href="https://buy.stripe.com/14A9AT4oSakggnh0X2fIs00" class="final-tertiary">Or buy FSMS Professional today &mdash; &#163;497, yours to keep &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; Functional Safety Playbook &nbsp;&middot;&nbsp; <a href="https://www.skool.com/functionalsafety">skool.com/functionalsafety</a> &nbsp;&middot;&nbsp; <a href="mailto:richard@functionalsafetyplaybook.com">richard@functionalsafetyplaybook.com</a></p>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")})},{threshold:0.06});
+document.querySelectorAll(".fade-up").forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
